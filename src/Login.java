@@ -12,29 +12,50 @@ public class Login extends JFrame {
     public Login() {
 
         setTitle("图书管理系统");
-        setSize(500, 300);
+        setSize(700, 390);
         setLayout(new GridLayout(6, 1));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel title = new JLabel("图书管理系统", JLabel.CENTER);
         title.setFont(new Font("heiti", 24, 24));
-        JLabel userLabel = new JLabel("账号：");
+
+        JLabel userLabel = new JLabel("账号：",JLabel.RIGHT);
         userLabel.setFont(bigFont);
-        JTextField userField = new JTextField(5);
+        JTextField userField = new JTextField(10);
+        userField.setFont(bigFont);
+        JPanel userJpanel = new JPanel();
 
-        JLabel passwordLabel = new JLabel("密码：");
-        JTextField passwordField = new JTextField(5);
+        userJpanel.setLayout(new GridLayout(1, 3));
+        userJpanel.add(userLabel);
+        userJpanel.add(userField);
+        userJpanel.add(new Label());
+
+        JLabel passwordLabel = new JLabel("密码：",JLabel.RIGHT);
+        passwordLabel.setFont(bigFont);
+        JTextField passwordField = new JTextField(1);
+        passwordField.setFont(bigFont);
+
+
+        JPanel passwordJpanel = new JPanel();
+        passwordJpanel.setLayout(new GridLayout(1, 3));
+        passwordJpanel.add(passwordLabel);
+        passwordJpanel.add(passwordField);
+        passwordJpanel.add(new Label());
+
+        JPanel buttonJpanel = new JPanel();
+        buttonJpanel.setLayout(new GridLayout(1, 3));
         JButton button = new JButton("Login");
+        buttonJpanel.add(new Label());
+        buttonJpanel.add(button);
+        buttonJpanel.add(new Label());
 
-
+        add(new Label());
         add(title);
-        add(userLabel);
-        add(userField);
-        add(passwordLabel);
-        add(passwordField);
-        add(button);
-        setLocationRelativeTo(null);
+        add(userJpanel);
+        add(passwordJpanel);
+        add(buttonJpanel);
+
         setVisible(true);
 
 
