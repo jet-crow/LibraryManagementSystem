@@ -18,7 +18,7 @@ public class Login extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel title = new JLabel("图书管理系统", JLabel.CENTER);
-        title.setFont(new Font("heiti", 24, 24));
+        title.setFont(new Font("heiti", 26, 26));
 
         JLabel userLabel = new JLabel("账号：",JLabel.RIGHT);
         userLabel.setFont(bigFont);
