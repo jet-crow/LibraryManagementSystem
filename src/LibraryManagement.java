@@ -10,7 +10,7 @@ public class LibraryManagement {
         new Login();
 
         /*//使用
-        DBUtils dbUtils = new DBUtils();
+        tools.DBUtils dbUtils = new tools.DBUtils();
         dbUtils.getConnection();
         // 执行查询
         System.out.println(" 实例化对象...");
