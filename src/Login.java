@@ -49,16 +49,19 @@ public class Login extends JFrame {
             DBUtils dbUtils = new DBUtils();
             dbUtils.getConnection();
             try {
+                //追加判断是否为管理员
+                String columnLabel = "student_id";
                 ResultSet resultSet = dbUtils.getStatement().executeQuery("SELECT * FROM student WHERE student_id = " + user + " and password = " + password);
                 if (resultSet.next()) {
                     System.out.println("登录成功");
-                    LibraryManagement.userID = resultSet.getString("student_id");
-
+                    LibraryManagement.userID = resultSet.getString(columnLabel);
+                    dispose();
+                    new Client();
                     return;
                 }
                 System.out.println("登录失败");
 
-            } catch (SQLException ex) {
+            } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
         });
