@@ -20,7 +20,7 @@ public class Login extends JFrame {
         JLabel title = new JLabel("图书管理系统", JLabel.CENTER);
         title.setFont(new Font("heiti", 26, 26));
 
-        JLabel userLabel = new JLabel("账号：",JLabel.RIGHT);
+        JLabel userLabel = new JLabel("账号：", JLabel.RIGHT);
         userLabel.setFont(bigFont);
         JTextField userField = new JTextField(10);
         userField.setFont(bigFont);
@@ -31,7 +31,7 @@ public class Login extends JFrame {
         userJpanel.add(userField);
         userJpanel.add(new Label());
 
-        JLabel passwordLabel = new JLabel("密码：",JLabel.RIGHT);
+        JLabel passwordLabel = new JLabel("密码：", JLabel.RIGHT);
         passwordLabel.setFont(bigFont);
         JTextField passwordField = new JTextField(1);
         passwordField.setFont(bigFont);
@@ -73,8 +73,7 @@ public class Login extends JFrame {
             try {
                 //追加判断是否为管理员
                 String columnLabel = "student_id";
-                ResultSet resultSet = null;
-                resultSet = dbUtils.getStatement().executeQuery("SELECT * FROM student WHERE student_id = " + user + " and password = " + password);
+                ResultSet resultSet = dbUtils.getStatement().executeQuery("SELECT * FROM student WHERE student_id = " + user + " and password = " + password);
                 if (resultSet.next()) {
                     System.out.println("登录成功");
                     LibraryManagement.userID = resultSet.getString(columnLabel);
