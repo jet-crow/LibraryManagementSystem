@@ -6,24 +6,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Login extends JFrame {
+    Font bigFont = new Font("heiti",18,18);
+    Font smallFont = new Font("heiti",13,13);
     public Login() {
+
         setTitle("图书管理系统");
-        setSize(500, 500);
-        setLayout(new GridLayout(4, 1));
+        setSize(500, 300);
+        setLayout(new GridLayout(6, 1));
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+        JLabel title = new JLabel("图书管理系统", JLabel.CENTER);
+        title.setFont(new Font("heiti",24,24));
         JLabel userLabel = new JLabel("账号：");
+        userLabel.setFont(bigFont);
         JTextField userField = new JTextField(5);
-        JLabel userPassword = new JLabel("密码：");
+
+        JLabel passwordLabel = new JLabel("密码：");
         JTextField passwordField = new JTextField(5);
         JButton button = new JButton("Login");
 
 
-        add(new JLabel("图书管理系统", JLabel.CENTER));
+        add(title);
         add(userLabel);
         add(userField);
+        add(passwordLabel);
         add(passwordField);
-        add(userPassword);
         add(button);
         setLocationRelativeTo(null);
         setVisible(true);
