@@ -8,54 +8,80 @@ import java.sql.ResultSet;
 public class Login extends JFrame {
     Font bigFont = new Font("heiti", 18, 18);
     Font smallFont = new Font("heiti", 13, 13);
+    private final int WIDTH = 700;
+    private final int HEIGHT = 390;
+
 
     public Login() {
 
         setTitle("图书管理系统");
-        setSize(700, 390);
-        setLayout(new GridLayout(6, 1));
+        setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+
 
         JLabel title = new JLabel("图书管理系统", JLabel.CENTER);
-        title.setFont(new Font("heiti", 26, 26));
+        title.setFont(new Font("heiti", Font.BOLD, 26));
+        title.setBounds(0, 0, WIDTH, 50);
 
+
+        //账号
         JLabel userLabel = new JLabel("账号：", JLabel.RIGHT);
         userLabel.setFont(bigFont);
         JTextField userField = new JTextField(10);
         userField.setFont(bigFont);
         JPanel userJpanel = new JPanel();
-
-        userJpanel.setLayout(new GridLayout(1, 3));
         userJpanel.add(userLabel);
         userJpanel.add(userField);
-        userJpanel.add(new Label());
+        userJpanel.setOpaque(false);
+        userJpanel.setBounds(0, 50, WIDTH, 40);
 
+        //密码
         JLabel passwordLabel = new JLabel("密码：", JLabel.RIGHT);
         passwordLabel.setFont(bigFont);
-        JTextField passwordField = new JTextField(1);
+        JTextField passwordField = new JTextField(10);
         passwordField.setFont(bigFont);
-
-
         JPanel passwordJpanel = new JPanel();
-        passwordJpanel.setLayout(new GridLayout(1, 3));
         passwordJpanel.add(passwordLabel);
         passwordJpanel.add(passwordField);
-        passwordJpanel.add(new Label());
+        passwordJpanel.setOpaque(false);
+        passwordJpanel.setBounds(0, 110, WIDTH, 40);
 
+        //单选框
+        JPanel chooseJpanel = new JPanel();
+        JRadioButton studentButton = new JRadioButton("普通用户");
+        JRadioButton adminButton = new JRadioButton("管理员");
+        ButtonGroup group = new ButtonGroup();
+        group.add(studentButton);
+        group.add(adminButton);
+        chooseJpanel.add(studentButton);
+        chooseJpanel.add(adminButton);
+        chooseJpanel.setOpaque(false);
+        chooseJpanel.setBounds(0, 170, WIDTH, 30);
+
+        //登录
         JPanel buttonJpanel = new JPanel();
-        buttonJpanel.setLayout(new GridLayout(1, 3));
         JButton button = new JButton("Login");
-        buttonJpanel.add(new Label());
+        button.setPreferredSize(new Dimension(100, 40));
         buttonJpanel.add(button);
-        buttonJpanel.add(new Label());
+        buttonJpanel.setOpaque(false);
+        buttonJpanel.setBounds(0, 220, WIDTH, 50);
 
-        add(new Label());
+        //录入结果集
         add(title);
         add(userJpanel);
         add(passwordJpanel);
+        add(chooseJpanel);
         add(buttonJpanel);
 
+        //背景图片
+        ImageIcon imageIcon = new ImageIcon("src/image/loginBg.jpeg");
+        JLabel imageLabel = new JLabel(imageIcon);
+        imageLabel.setBounds(0, 0, WIDTH, HEIGHT);
+        add(imageLabel);
+
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
 
@@ -72,8 +98,24 @@ public class Login extends JFrame {
             dbUtils.getConnection();
             try {
                 //追加判断是否为管理员
-                String columnLabel = "student_id";
-                ResultSet resultSet = dbUtils.getStatement().executeQuery("SELECT * FROM student WHERE student_id = " + user + " and password = " + password);
+                String columnLabel;
+                ResultSet resultSet = null;
+                String sql;
+                if (studentButton.isSelected()) {//普通用户
+                    columnLabel = "student_id";
+                    sql = "SELECT * FROM student WHERE student_id = " + user + " and password = " + password;
+                    LibraryManagement.userLevel = 2;
+                } else if (adminButton.isSelected()) {//管理员
+                    columnLabel = "username";
+                    sql = "SELECT * FROM admin WHERE username = '" + user + "' and password = " + password;
+                    LibraryManagement.userLevel = 2;
+                } else {
+                    new MyDialog().init("请选择登录类型");
+                    return;
+                }
+
+//                System.out.println(sql);
+                resultSet = dbUtils.getStatement().executeQuery(sql);
                 if (resultSet.next()) {
                     System.out.println("登录成功");
                     LibraryManagement.userID = resultSet.getString(columnLabel);
@@ -82,10 +124,12 @@ public class Login extends JFrame {
                     return;
                 }
                 new MyDialog().init("登录失败");
+                LibraryManagement.userLevel = 0;
 
-                System.out.println("登录失败");
 
             } catch (Exception ex) {
+                new MyDialog().init("登录失败");
+                LibraryManagement.userLevel = 0;
                 throw new RuntimeException(ex);
             }
         });

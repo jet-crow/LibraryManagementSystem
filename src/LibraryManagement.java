@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class LibraryManagement {
     public static String userID;
+    public static int userLevel;//0=空；1=管理员；2=普通用户
     public static void main(String[] args) {
         new Login();
 
