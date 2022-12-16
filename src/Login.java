@@ -6,8 +6,8 @@ import java.awt.*;
 import java.sql.ResultSet;
 
 public class Login extends JFrame {
-    Font bigFont = new Font("heiti", 18, 18);
-    Font smallFont = new Font("heiti", 13, 13);
+    private Font bigFont = new Font("宋体", 18, 18);
+    private Font smallFont = new Font("宋体", 13, 13);
     private final int WIDTH = 600;
     private final int HEIGHT = 290;
 
@@ -21,7 +21,7 @@ public class Login extends JFrame {
 
 
         JLabel title = new JLabel("图书管理系统", JLabel.CENTER);
-        title.setFont(new Font("heiti", Font.BOLD, 26));
+        title.setFont(new Font("宋体", Font.BOLD, 26));
         title.setBounds(0, 30, WIDTH, 50);
 
 
