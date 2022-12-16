@@ -87,11 +87,11 @@ public class BooksBorrowed extends JPanel {
         btnJpanel.setBounds(0, 540, 1024,60);
         JButton returnBookBtn = new JButton("还书");
         returnBookBtn.setFont(bigFont);
-        returnBookBtn.setBounds(137,0,100,60);
+        returnBookBtn.setBounds(137,0,200,60);
         btnJpanel.add(returnBookBtn);
         JButton borrowBooksBtn = new JButton("借书");
         borrowBooksBtn.setFont(bigFont);
-        borrowBooksBtn.setBounds(237,0,100,60);
+        borrowBooksBtn.setBounds(337,0,200,60);
         btnJpanel.add(borrowBooksBtn);
         add(btnJpanel);
 
