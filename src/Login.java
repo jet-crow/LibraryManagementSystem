@@ -122,6 +122,8 @@ public class Login extends JFrame {
                     System.out.println(LibraryManagement.userLevel);
                     dispose();
                     new Client();
+                    dbUtils.close();
+                    resultSet.close();
                     return;
                 }
                 new MyDialog().init("登录失败");

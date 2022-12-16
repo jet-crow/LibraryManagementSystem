@@ -51,14 +51,14 @@ public class Client extends JFrame {
     }
 
     public void getSerial() {
-        serial.add(new MenuData("主界面","Welcome"));
         //0=空；1=管理员；2=普通用户
         if (LibraryManagement.userLevel == 2) {
-            serial.add(new MenuData("图书查询","student.BookInquiry"));
+            serial.add(new MenuData("主界面","Welcome"));
+            serial.add(new MenuData("图书查询","student.BookInsert"));
             serial.add(new MenuData("图书借还","student.BooksBorrowed"));
             serial.add(new MenuData("账号管理","student.AccountManagement"));
         } else if (LibraryManagement.userLevel == 1) {
-            serial.add(new MenuData("图书查询","admin.BookInquiry"));
+            serial.add(new MenuData("借书记录","admin.BorrowBooksRecord"));
             serial.add(new MenuData("图书新增","admin.BookInsert"));
             serial.add(new MenuData("图书删改","admin.BookRevised"));
             serial.add(new MenuData("账户管理","admin.AccountManagement"));
