@@ -1,5 +1,7 @@
 package student;
 
+import tools.JTextFieldHintListener;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,6 +20,7 @@ public class BooksBorrowed extends JPanel {
         searchJpanel.setLayout(null);
         searchJpanel.setBounds(0, 140, 1024,60);
         JTextField searchJTextField  = new JTextField(10);
+        searchJTextField.addFocusListener(new JTextFieldHintListener(searchJTextField, "输入要搜索的书编号"));
         searchJTextField.setFont(bigFont);
         searchJTextField.setBounds(137,0,500,60);
         searchJpanel.add(searchJTextField);
