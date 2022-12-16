@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class AccountManagement extends JPanel {
     private Font bigFont = new Font("宋体", Font.BOLD, 40);
-    private Font smallFont = new Font("宋体", 13, 13);
     private Font titleFont = new Font("宋体", Font.BOLD, 70);
     public AccountManagement() {
         setLayout(null);
