@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 public class Login extends JFrame {
     Font bigFont = new Font("heiti", 18, 18);
     Font smallFont = new Font("heiti", 13, 13);
-    private final int WIDTH = 700;
-    private final int HEIGHT = 390;
+    private final int WIDTH = 600;
+    private final int HEIGHT = 290;
 
 
     public Login() {
@@ -22,7 +22,7 @@ public class Login extends JFrame {
 
         JLabel title = new JLabel("图书管理系统", JLabel.CENTER);
         title.setFont(new Font("heiti", Font.BOLD, 26));
-        title.setBounds(0, 0, WIDTH, 50);
+        title.setBounds(0, 30, WIDTH, 50);
 
 
         //账号
@@ -34,7 +34,7 @@ public class Login extends JFrame {
         userJpanel.add(userLabel);
         userJpanel.add(userField);
         userJpanel.setOpaque(false);
-        userJpanel.setBounds(0, 50, WIDTH, 40);
+        userJpanel.setBounds(0, 80, WIDTH, 40);
 
         //密码
         JLabel passwordLabel = new JLabel("密码：", JLabel.RIGHT);
@@ -45,7 +45,7 @@ public class Login extends JFrame {
         passwordJpanel.add(passwordLabel);
         passwordJpanel.add(passwordField);
         passwordJpanel.setOpaque(false);
-        passwordJpanel.setBounds(0, 110, WIDTH, 40);
+        passwordJpanel.setBounds(0, 120, WIDTH, 40);
 
         //单选框
         JPanel chooseJpanel = new JPanel();
@@ -57,7 +57,7 @@ public class Login extends JFrame {
         chooseJpanel.add(studentButton);
         chooseJpanel.add(adminButton);
         chooseJpanel.setOpaque(false);
-        chooseJpanel.setBounds(0, 170, WIDTH, 30);
+        chooseJpanel.setBounds(0, 160, WIDTH, 30);
 
         //登录
         JPanel buttonJpanel = new JPanel();
@@ -65,7 +65,7 @@ public class Login extends JFrame {
         button.setPreferredSize(new Dimension(100, 40));
         buttonJpanel.add(button);
         buttonJpanel.setOpaque(false);
-        buttonJpanel.setBounds(0, 220, WIDTH, 50);
+        buttonJpanel.setBounds(0, 190, WIDTH, 50);
 
         //录入结果集
         add(title);
