@@ -108,7 +108,7 @@ public class Login extends JFrame {
                 } else if (adminButton.isSelected()) {//管理员
                     columnLabel = "username";
                     sql = "SELECT * FROM admin WHERE username = '" + user + "' and password = " + password;
-                    LibraryManagement.userLevel = 2;
+                    LibraryManagement.userLevel = 1;
                 } else {
                     new MyDialog().init("请选择登录类型");
                     return;
@@ -119,6 +119,7 @@ public class Login extends JFrame {
                 if (resultSet.next()) {
                     System.out.println("登录成功");
                     LibraryManagement.userID = resultSet.getString(columnLabel);
+                    System.out.println(LibraryManagement.userLevel);
                     dispose();
                     new Client();
                     return;

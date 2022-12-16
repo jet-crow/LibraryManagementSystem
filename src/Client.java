@@ -1,28 +1,67 @@
+import entity.MenuData;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Client extends JFrame {
-    public String[] Serial = {"123", "1234", "123456"};
+    public List<MenuData> serial = new ArrayList<>();
+    private Font font = new Font("宋体", Font.BOLD, 20);
+
+    //菜单跳转
+    public static void Show(JMenu item, JFrame frame, String s) {
+        item.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    @SuppressWarnings("deprecation")
+                    Object object = Class.forName(s).newInstance();//forName(String className)根据类名返回类的对象
+                    frame.getContentPane().removeAll();
+                    frame.add((Component) object);
+                    frame.revalidate();
+                    frame.repaint();
+                } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+    }
 
     public Client() {
+        getSerial();//获取菜单
         setTitle("图书管理系统");
         setSize(1024, 768);
-        setLayout(new BorderLayout());
-        JPanel panel = new JPanel(new BorderLayout());
-        JMenuBar bar = new JMenuBar();
-        setJMenuBar(bar);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        for (int i = 0; i < 3; i++) {
-            JMenu menu = new JMenu(Serial[i]);
-            bar.add(menu);
+        JMenuBar menuBar = new JMenuBar();//菜单栏
+        setJMenuBar(menuBar);//设置为窗体的菜单栏
+        for (MenuData menuData : serial) {
+            JMenu menu = new JMenu(menuData.getTitle());
+            menu.setFont(font);
+            menuBar.add(menu);
+            Show(menu, this, menuData.getClassName());
+
         }
-
-        //添加结果集
-        add(bar);
-        add(panel);
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add(new Welcome());
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void getSerial() {
+        serial.add(new MenuData("主界面","Welcome"));
+        //0=空；1=管理员；2=普通用户
+        if (LibraryManagement.userLevel == 2) {
+            serial.add(new MenuData("图书查询","student.BookInquiry"));
+            serial.add(new MenuData("图书借还","student.BooksBorrowed"));
+            serial.add(new MenuData("账号管理","student.AccountManagement"));
+        } else if (LibraryManagement.userLevel == 1) {
+            serial.add(new MenuData("图书查询","admin.BookInquiry"));
+            serial.add(new MenuData("图书新增","admin.BookInsert"));
+            serial.add(new MenuData("图书删改","admin.BookRevised"));
+            serial.add(new MenuData("账户管理","admin.AccountManagement"));
+        }
     }
 }
